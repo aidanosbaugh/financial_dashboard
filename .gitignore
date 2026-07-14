@@ -1,0 +1,13 @@
+# Python
+*.pyc
+
+# Virtual Environments
+venv/
+.env
+
+# Mac Files
+.Ds_Store
+
+# Jupyter
+
+.ipynb_checkpoints/
