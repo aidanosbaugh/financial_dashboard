@@ -1,41 +1,4 @@
 import csv
-import streamlit as st
-import pandas as pd
-
-st.title("Financial Dashboard")
-
-df = pd.read_csv("portfolio.csv")
-
-st.dataframe(df)
-
-st.metric(
-    label="Portfolio Value",
-    value="$18,423"
-)
-
-import yfinance as yf
-import datetime as dt
-
-
-def get_price(ticker):
-   try:
-        stock = yf.Ticker(ticker)
-        return (stock.fast_info["lastPrice"])
-   except Exception:
-       return None
-   
-def update_price(stocks):
-    print("Updating Prices ... ")
-    for stock in stocks: 
-        price = get_price(stock["Ticker"])
-        if price is None:
-            print(stock["Ticker"], "x failed")
-            continue
-        stock["Price"] = price
-        print(f"{stock['Ticker']:6} ✓ {price:.2f}")
-    save_portfolio(stocks)
-    print("Portfolio succesfully updated")
-    print(f"at {dt.datetime.today()}")
 
 def load_portfolio():
     stocks = []
@@ -93,3 +56,5 @@ def profit_stock(stock):
 def percent_gain(stock):
     percent_gain = profit_stock(stock) / (stock["Original Price"] * stock["Shares"]) * 100 
     return percent_gain
+
+stocks = load_portfolio()
