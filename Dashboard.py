@@ -136,9 +136,3 @@ with col3:
 
 st.divider()
 
-fig = allocation_chart(df)
-
-st.plotly_chart(
-    fig, 
-    use_container_width=True
-)

@@ -1,7 +1,17 @@
 import streamlit as st
 import pandas as pd
-import yfinance as yf
-import plotly.express as px
 
 from src.portfolio import load_portfolio
-from src.data import get_history
+from src.charts import allocation_chart
+
+
+stocks = load_portfolio()
+
+df = pd.DataFrame(stocks)
+
+fig = allocation_chart(df)
+
+st.plotly_chart(
+    fig,
+    use_container_width=True
+)

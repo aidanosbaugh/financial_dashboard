@@ -1,4 +1,18 @@
 import csv
+from src.data import get_history
+
+
+def get_portfolio_history(stocks, period):
+    portfolio_hist_value = None
+    for stock in stocks:
+        history = get_history(stock["Ticker"], period)
+        hist_value = history["Close"]* stock["Shares"]
+        if portfolio_hist_value is None:
+                portfolio_hist_value = hist_value
+        else:
+            portfolio_hist_value += hist_value
+    return portfolio_hist_value
+
 
 def load_portfolio():
     stocks = []
@@ -56,5 +70,3 @@ def profit_stock(stock):
 def percent_gain(stock):
     percent_gain = profit_stock(stock) / (stock["Original Price"] * stock["Shares"]) * 100 
     return percent_gain
-
-stocks = load_portfolio()
